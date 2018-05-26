@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Consul;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Primitives;
 
 namespace Config.Consul
 {
 	public class ConsulConfigurationProvider : ConfigurationProvider
 	{
 		private readonly Func<IConsulClient> _clientFactory;
+		private readonly string _prefix;
 
-		public ConsulConfigurationProvider(Func<IConsulClient> clientFactory)
+		public ConsulConfigurationProvider(Func<IConsulClient> clientFactory, string prefix)
 		{
 			_clientFactory = clientFactory;
+			_prefix = prefix ?? string.Empty;
 		}
 
 		public override void Load()
@@ -23,11 +23,14 @@ namespace Config.Consul
 
 			using (var client = _clientFactory())
 			{
-				var results = client.KV.List("").Result.Response;
+				var results = client.KV.List(_prefix).Result.Response;
 
 				foreach (var pair in results)
 				{
-					Data[pair.Key] = AsString(pair.Value);
+					var key = pair.Key.Substring(_prefix.Length);
+					var value = AsString(pair.Value);
+
+					Data[key] = value;
 				}
 			}
 		}

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Consul;
+using Microsoft.Extensions.Configuration;
 
 namespace Config.Consul
 {
@@ -6,7 +7,7 @@ namespace Config.Consul
 	{
 		public IConfigurationProvider Build(IConfigurationBuilder builder)
 		{
-			return new ConsulConfigurationProvider();
+			return new ConsulConfigurationProvider(() => new ConsulClient(), string.Empty);
 		}
 	}
 }
