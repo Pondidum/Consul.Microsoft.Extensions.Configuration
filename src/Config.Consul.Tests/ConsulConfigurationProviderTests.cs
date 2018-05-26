@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using Consul;
+using Microsoft.Extensions.Configuration;
 using Shouldly;
 using Xunit;
 
@@ -39,18 +40,68 @@ namespace Config.Consul.Tests
 			value.ShouldBe("one");
 		}
 
-		private string Prefixed(string key) => _prefix + key;
-		private Task Write(string key, string value) => _client.KV.Put(Pair(key, value));
-
-		private KVPair Pair(string key, string value) => new KVPair(Prefixed(key))
+		[Fact]
+		public async Task When_building_a_configuration_object()
 		{
-			Value = Encoding.UTF8.GetBytes(value)
-		};
+			var name = "Testing configuration";
+			var time = TimeSpan.FromSeconds(146);
+
+			await Write(nameof(TestConfig.Name), name);
+			await Write(nameof(TestConfig.Interval), time.ToString());
+
+			var config = new ConfigurationBuilder()
+				.AddConsul(_prefix)
+				.Build()
+				.Get<TestConfig>();
+
+			config.ShouldSatisfyAllConditions(
+				() => config.Name.ShouldBe(name),
+				() => config.Interval.ShouldBe(time)
+			);
+		}
+
+		[Fact]
+		public async Task When_building_a_composite_configuration_object()
+		{
+			var type = "nested";
+			var name = "Testing configuration";
+			var time = TimeSpan.FromSeconds(146);
+
+			await Write("type", type);
+			await Write("inner/name", name);
+			await Write("inner/interval", time.ToString());
+
+			var config = new ConfigurationBuilder()
+				.AddConsul(_prefix)
+				.Build()
+				.Get<OuterConfig>();
+
+			config.ShouldSatisfyAllConditions(
+				() => config.Type.ShouldBe(type),
+				() => config.Inner.Name.ShouldBe(name),
+				() => config.Inner.Interval.ShouldBe(time)
+			);
+		}
+
+		private Task Write(string key, string value) => _client.KV.Put(Pair(key, value));
+		private KVPair Pair(string key, string value) => new KVPair(_prefix + key) { Value = Encoding.UTF8.GetBytes(value) };
 
 		public void Dispose()
 		{
 			_client.KV.DeleteTree(_prefix).Wait();
 			_client.Dispose();
+		}
+
+		private class OuterConfig
+		{
+			public string Type { get; set; }
+			public TestConfig Inner { get; set; }
+		}
+
+		private class TestConfig
+		{
+			public string Name { get; set; }
+			public TimeSpan Interval { get; set; }
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace Config.Consul
 
 				foreach (var pair in results)
 				{
-					var key = pair.Key.Substring(_prefix.Length);
+					var key = ReplacePathDelimiters(RemovePrefix(pair.Key));
 					var value = AsString(pair.Value);
 
 					Data[key] = value;
@@ -35,7 +35,8 @@ namespace Config.Consul
 			}
 		}
 
-		private static string AsString(byte[] bytes) =>
-			Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+		private string RemovePrefix(string input) => input.Substring(_prefix.Length);
+		private static string ReplacePathDelimiters(string input) => input.Replace("/", ConfigurationPath.KeyDelimiter);
+		private static string AsString(byte[] bytes) => Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 	}
 }

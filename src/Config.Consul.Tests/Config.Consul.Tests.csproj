@@ -6,6 +6,7 @@
   <ItemGroup>
     <PackageReference Include="Consul" Version="0.7.2.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
     <PackageReference Include="NSubstitute" Version="2.0.3" />
     <PackageReference Include="Shouldly" Version="3.0.0" />
