@@ -1,34 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Consul;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 
 namespace Config.Consul
 {
-	public class ConsulConfigurationProvider : IConfigurationProvider
+	public class ConsulConfigurationProvider : ConfigurationProvider
 	{
-		public bool TryGet(string key, out string value)
+		private readonly Func<IConsulClient> _clientFactory;
+
+		public ConsulConfigurationProvider(Func<IConsulClient> clientFactory)
 		{
-			throw new System.NotImplementedException();
+			_clientFactory = clientFactory;
 		}
 
-		public void Set(string key, string value)
+		public override void Load()
 		{
-			throw new System.NotImplementedException();
+			Data = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+			using (var client = _clientFactory())
+			{
+				var results = client.KV.List("").Result.Response;
+
+				foreach (var pair in results)
+				{
+					Data[pair.Key] = AsString(pair.Value);
+				}
+			}
 		}
 
-		public IChangeToken GetReloadToken()
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public void Load()
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public IEnumerable<string> GetChildKeys(IEnumerable<string> earlierKeys, string parentPath)
-		{
-			throw new System.NotImplementedException();
-		}
+		private static string AsString(byte[] bytes) =>
+			Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 	}
 }
