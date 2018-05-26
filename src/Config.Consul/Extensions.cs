@@ -8,5 +8,13 @@ namespace Config.Consul
 		{
 			return configurationBuilder.Add(new ConsulConfigurationSource());
 		}
+
+		public static IConfigurationBuilder AddConsul(this IConfigurationBuilder configurationBuilder, string prefix)
+		{
+			return configurationBuilder.Add(new ConsulConfigurationSource
+			{
+				Prefix = prefix
+			});
+		}
 	}
 }
