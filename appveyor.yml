@@ -1,0 +1,7 @@
+version: '{build}'
+build_script:
+- sh build.sh Release
+test: off
+artifacts:
+- path: .build\*.nupkg
+  name: NugetPackages
