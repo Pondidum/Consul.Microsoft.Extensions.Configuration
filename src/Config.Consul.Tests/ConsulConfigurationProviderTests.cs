@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Consul;
 using Microsoft.Extensions.Configuration;
 using Shouldly;
-using Xunit;
 
 namespace Config.Consul.Tests
 {
@@ -40,7 +39,7 @@ namespace Config.Consul.Tests
 			value.ShouldBe("one");
 		}
 
-		[Fact]
+		[RequiresConsulFact]
 		public async Task When_building_a_configuration_object()
 		{
 			var name = "Testing configuration";
@@ -60,7 +59,7 @@ namespace Config.Consul.Tests
 			);
 		}
 
-		[Fact]
+		[RequiresConsulFact]
 		public async Task When_building_a_composite_configuration_object()
 		{
 			var type = "nested";
