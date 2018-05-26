@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using Microsoft.Extensions.Configuration;
 
 namespace Config.Consul
 {
@@ -27,6 +28,22 @@ namespace Config.Consul
 			{
 				Prefix = prefix
 			});
+		}
+
+		/// <summary>
+		/// Adds an <see cref="IConfigurationProvider"/> that reads configuration values from Consul
+		/// with a specified prefix.
+		/// </summary>
+		/// <param name="configurationBuilder">The <see cref="IConfigurationBuilder"/> to add to.</param>
+		/// <param name="prefix">The prefix that Consul keys must start with. The prefix will be removed from the keys.</param>
+		/// <param name="configure">Configure extra options, such as Prefixes and Consul Consistency level</param>
+		/// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
+		public static IConfigurationBuilder AddConsul(this IConfigurationBuilder configurationBuilder, Action<ConsulConfigurationSource> configure)
+		{
+			var source = new ConsulConfigurationSource();
+			configure(source);
+
+			return configurationBuilder.Add(source);
 		}
 	}
 }

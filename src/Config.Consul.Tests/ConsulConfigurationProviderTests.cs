@@ -17,7 +17,7 @@ namespace Config.Consul.Tests
 		{
 			_client = new ConsulClient();
 			_prefix = Guid.NewGuid() + "/";
-			_provider = new ConsulConfigurationProvider(() => new ConsulClient(), _prefix);
+			_provider = new ConsulConfigurationProvider(() => new ConsulClient(), QueryOptions.Default, _prefix);
 		}
 
 		[RequiresConsulFact]

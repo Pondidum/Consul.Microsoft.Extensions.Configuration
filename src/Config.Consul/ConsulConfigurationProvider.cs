@@ -9,11 +9,13 @@ namespace Config.Consul
 	public class ConsulConfigurationProvider : ConfigurationProvider
 	{
 		private readonly Func<IConsulClient> _clientFactory;
+		private readonly QueryOptions _options;
 		private readonly string _prefix;
 
-		public ConsulConfigurationProvider(Func<IConsulClient> clientFactory, string prefix)
+		public ConsulConfigurationProvider(Func<IConsulClient> clientFactory, QueryOptions options, string prefix)
 		{
 			_clientFactory = clientFactory;
+			_options = options;
 			_prefix = prefix ?? string.Empty;
 		}
 
@@ -23,7 +25,10 @@ namespace Config.Consul
 
 			using (var client = _clientFactory())
 			{
-				var results = client.KV.List(_prefix).Result.Response;
+				var results = client.KV
+					.List(_prefix, _options)
+					.Result	// ehhh, we have no async version of Load :(
+					.Response;
 
 				foreach (var pair in results)
 				{
