@@ -1,5 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <PackageId>Microsoft.Extensions.Configuration.Consul</PackageId>
+    <PackageTags>consul;configuration;discovery</PackageTags>
+    <PackageVersion>0.0.1</PackageVersion>
+    <Title>Microsoft.Extensions.Configuration.Consul</Title>
+    <Description>Consul configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
+    <Authors>Andy Dote</Authors>
+    <PackageProjectUrl>https://github.com/pondidum/Microsoft.Extensions.Configuration.Consul/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/pondidum/Microsoft.Extensions.Configuration.Consul/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/pondidum/Microsoft.Extensions.Configuration.Consul</RepositoryUrl>
+  </PropertyGroup>
+  <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
