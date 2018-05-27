@@ -1,13 +1,13 @@
-# Microsoft.Extensions.Configuration.Consul
+# Consul.Microsoft.Extensions.Configuration
 
 ## Installation
 
 ```powershell
-PM> Install-Package Microsoft.Extensions.Configuration.Consul
+PM> Install-Package Consul.Microsoft.Extensions.Configuration
 ```
 
 ```bash
-dotnet add package Microsoft.Extensions.Configuration.Consul
+dotnet add package Consul.Microsoft.Extensions.Configuration
 ```
 
 ## Usage
