@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Consul.Microsoft.Extensions.Configuration</PackageId>
-    <PackageTags>consul;configuration;discovery</PackageTags>
+    <PackageTags>consul;configuration;discovery;Microsoft.Extensions.Configuration</PackageTags>
     <PackageVersion>0.0.1</PackageVersion>
     <Title>Consul.Microsoft.Extensions.Configuration</Title>
     <Description>Consul configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
