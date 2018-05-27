@@ -10,6 +10,8 @@
     <PackageLicenseUrl>https://github.com/pondidum/Consul.Microsoft.Extensions.Configuration/blob/master/LICENSE.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/pondidum/Consul.Microsoft.Extensions.Configuration</RepositoryUrl>
+    <AssemblyName>Microsoft.Extensions.Configuration.Consul</AssemblyName>
+    <RootNamespace>Microsoft.Extensions.Configuration.Consul</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>

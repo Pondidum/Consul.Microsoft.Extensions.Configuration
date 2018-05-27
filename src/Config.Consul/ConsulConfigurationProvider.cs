@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Consul;
-using Microsoft.Extensions.Configuration;
 
-namespace Config.Consul
+namespace Microsoft.Extensions.Configuration.Consul
 {
 	public class ConsulConfigurationProvider : ConfigurationProvider
 	{

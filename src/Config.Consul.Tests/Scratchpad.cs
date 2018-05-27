@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Config.Consul.Tests
+namespace Microsoft.Extensions.Configuration.Consul.Tests
 {
 	public class Scratchpad
 	{

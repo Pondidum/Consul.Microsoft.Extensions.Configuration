@@ -2,10 +2,9 @@
 using System.Text;
 using System.Threading.Tasks;
 using Consul;
-using Microsoft.Extensions.Configuration;
 using Shouldly;
 
-namespace Config.Consul.Tests
+namespace Microsoft.Extensions.Configuration.Consul.Tests
 {
 	public class ConsulConfigurationProviderTests : IDisposable
 	{

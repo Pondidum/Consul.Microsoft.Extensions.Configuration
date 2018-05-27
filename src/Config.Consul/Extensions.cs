@@ -1,7 +1,6 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
 
-namespace Config.Consul
+namespace Microsoft.Extensions.Configuration.Consul
 {
 	public static class Extensions
 	{

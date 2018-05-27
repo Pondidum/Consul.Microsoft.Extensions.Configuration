@@ -1,10 +1,9 @@
 ﻿using System;
 using Consul;
-using Microsoft.Extensions.Configuration;
 using NSubstitute;
 using Xunit;
 
-namespace Config.Consul.Tests
+namespace Microsoft.Extensions.Configuration.Consul.Tests
 {
 	public class ExtensionsTests
 	{
