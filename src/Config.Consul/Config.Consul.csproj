@@ -2,7 +2,7 @@
   <PropertyGroup>
     <PackageId>Consul.Microsoft.Extensions.Configuration</PackageId>
     <PackageTags>consul;configuration;discovery;Microsoft.Extensions.Configuration</PackageTags>
-    <PackageVersion>0.0.1</PackageVersion>
+    <PackageVersion>0.0.2</PackageVersion>
     <Title>Consul.Microsoft.Extensions.Configuration</Title>
     <Description>Consul configuration provider implementation for Microsoft.Extensions.Configuration.</Description>
     <Authors>Andy Dote</Authors>

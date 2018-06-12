@@ -29,6 +29,9 @@ namespace Microsoft.Extensions.Configuration.Consul
 					.Result	// ehhh, we have no async version of Load :(
 					.Response;
 
+				if (results == null)
+					return;
+
 				foreach (var pair in results)
 				{
 					var key = ReplacePathDelimiters(RemovePrefix(pair.Key));
