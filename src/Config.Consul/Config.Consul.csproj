@@ -12,7 +12,15 @@
     <RepositoryUrl>git://github.com/pondidum/Consul.Microsoft.Extensions.Configuration</RepositoryUrl>
     <AssemblyName>Microsoft.Extensions.Configuration.Consul</AssemblyName>
     <RootNamespace>Microsoft.Extensions.Configuration.Consul</RootNamespace>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
