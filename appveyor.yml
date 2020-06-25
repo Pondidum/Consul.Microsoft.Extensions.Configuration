@@ -5,3 +5,5 @@ test: off
 artifacts:
 - path: .build\*.nupkg
   name: NugetPackages
+- path: .build\*.snupkg
+  name: NugetPackages
